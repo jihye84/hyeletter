@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>히에로글리프 4음절 𓄪</title>
+    <title>히에로글리프 2음절 𓉐</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap"
         rel="stylesheet">
@@ -40,6 +40,7 @@
             text-align: center;
             border: 8px solid #fdfbf7;
             position: relative;
+            overflow-y: auto;
         }
 
         #word-display {
@@ -125,8 +126,8 @@
         <a href="index.html"
             style="position:absolute; top:15px; left:20px; text-decoration:none; font-size:30px; font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', sans-serif;">𓉐</a>
         <div style="margin-top:5px;"><span
-                style="background:var(--primary); color:white; padding:5px 20px; border-radius:20px; font-size:13px; font-weight:bold;">4음절
-                음가 학습 𓄪</span></div>
+                style="background:var(--primary); color:white; padding:5px 20px; border-radius:20px; font-size:13px; font-weight:bold;">2음절
+                음가 학습 𓉐</span></div>
         <div id="word-display"></div>
         <div id="feedback-area">
             <div id="feedback"></div>
@@ -136,10 +137,9 @@
         <div id="progress-indicator" style="margin-top: 15px; font-weight: bold; color: #5d4037;"></div>
     </div>
 
-    <script src="hieroglyphsfour.js"></script>
+    <script src="hieroglyphstwo.js"></script>
     <script>
-        // hieroData is loaded from hieroglyphsfour.js
-
+        // hieroData is loaded from hieroglyphstwo.js
 
         let currentQuizSet = [], currentIdx = 0, correctCount = 0, failedQuestions = [], isReviewMode = false;
 
@@ -154,8 +154,8 @@
         function startGame() {
             isReviewMode = false;
             failedQuestions = [];
-            // Randomly select 7 questions
-            currentQuizSet = [...hieroData].sort(() => Math.random() - 0.5).slice(0, 7);
+            // Randomly select 10 questions
+            currentQuizSet = [...hieroData].sort(() => Math.random() - 0.5).slice(0, 10);
             resetState();
         }
 
@@ -169,7 +169,7 @@
         function resetState() {
             currentIdx = 0;
             correctCount = 0;
-            document.getElementById('game-container').querySelector('span').innerText = isReviewMode ? "오답 복습 🔁" : "4음절 음가 학습 𓄪";
+            document.getElementById('game-container').querySelector('span').innerText = isReviewMode ? "오답 복습 🔁" : "2음절 음가 학습 𓉐";
             document.getElementById('feedback').innerText = "";
             document.getElementById('next-btn').style.visibility = 'hidden';
             document.getElementById('options').style.display = 'grid';
@@ -198,11 +198,7 @@
             let options = [q.transliteration];
             let others = hieroData.filter(i => i.transliteration !== q.transliteration).map(i => i.transliteration);
             let shuffleOthers = [...new Set(others)].sort(() => Math.random() - 0.5);
-
-            for (let i = 0; i < 3; i++) {
-                if (shuffleOthers[i]) options.push(shuffleOthers[i]);
-            }
-
+            for (let i = 0; i < 3; i++) options.push(shuffleOthers[i]);
             options.sort(() => Math.random() - 0.5);
 
             const optionsDiv = document.getElementById('options');
@@ -219,6 +215,7 @@
         function checkAnswer(selected, qObj) {
             document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
             speakPhonetic(qObj.sound_desc);
+
             const fb = document.getElementById('feedback');
             if (selected === qObj.transliteration) {
                 fb.innerHTML = `<span class="correct">정답! [ ${qObj.transliteration} ]</span><br><small>${qObj.object} (${qObj.phonetic})</small>`;
@@ -253,7 +250,7 @@
                 <span style="font-size: 50px;">🎉</span>
                 <h2>학습 완료!</h2>
                 <p style="font-size: 20px; color: #5d4037;">${currentQuizSet.length}문제 중 ${correctCount}점</p>
-                <button onclick="startGame()" style="background:var(--primary); color:white; padding:15px 30px; border:none; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:10px; font-size:16px;">✨ 새로운 7문제</button>
+                <button onclick="startGame()" style="background:var(--primary); color:white; padding:15px 30px; border:none; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:10px; font-size:16px;">✨ 새로운 10문제</button>
             `;
 
             if (failedQuestions.length > 0) {
