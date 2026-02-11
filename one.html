@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>히에로글리프 1음절 𓄿</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #eaddca 0%, #d2b48c 100%);
+            --card-bg: #ffffff;
+            --primary: #8b4513;
+            --text-color: #3e2723;
+        }
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #game-container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 400px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            border: 8px solid #fdfbf7;
+            position: relative;
+        }
+
+        #word-display {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 폰트 기반 렌더링 */
+        /* 폰트 기반 렌더링 */
+        #word-display {
+            font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', sans-serif;
+            font-size: 150px;
+            color: var(--text-color);
+        }
+
+
+
+        /* ... skipping unchanged lines ... */
+        #feedback-area {
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #feedback {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        .correct {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: 15px;
+        }
+
+        button.option-btn {
+            padding: 20px 5px;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            border-radius: 20px;
+            background: #fffdfa;
+            color: var(--text-color);
+            box-shadow: 0 5px 0px #d7c4a3;
+            transition: 0.1s;
+            font-weight: 700;
+        }
+
+        button.option-btn:active:not(:disabled) {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        #next-btn {
+            background: var(--primary);
+            font-size: 16px;
+            padding: 12px 40px;
+            border-radius: 50px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            visibility: hidden;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="game-container">
+        <a href="index.html"
+            style="position:absolute; top:15px; left:20px; text-decoration:none; font-size:30px; font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', sans-serif;">𓉐</a>
+        <div style="margin-top:5px;"><span
+                style="background:var(--primary); color:white; padding:5px 20px; border-radius:20px; font-size:13px; font-weight:bold;">1음절
+                음가 학습 𓅃</span></div>
+        <div id="word-display"></div>
+        <div id="feedback-area">
+            <div id="feedback"></div>
+            <button id="next-btn" onclick="goToNextQuestion()">다음 문제 ❯</button>
+        </div>
+        <div id="options" class="options-grid"></div>
+        <div id="progress-indicator" style="margin-top: 15px; font-weight: bold; color: #5d4037;"></div>
+    </div>
+
+    <script src="hieroglyphsone.js"></script>
+    <script>
+        // hieroData is loaded from hieroglyphsone.js
+
+        let currentQuizSet = [], currentIdx = 0, correctCount = 0, failedQuestions = [], isReviewMode = false;
+
+        function speakPhonetic(hint) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(hint);
+            utterance.lang = 'ko-KR';
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function startGame() {
+            isReviewMode = false;
+            failedQuestions = [];
+            // Randomly select 10 questions
+            currentQuizSet = [...hieroData].sort(() => Math.random() - 0.5).slice(0, 10);
+            resetState();
+        }
+
+        function startRetryMode() {
+            isReviewMode = true;
+            currentQuizSet = [...failedQuestions].sort(() => Math.random() - 0.5);
+            failedQuestions = [];
+            resetState();
+        }
+
+        function resetState() {
+            currentIdx = 0;
+            correctCount = 0;
+            document.getElementById('game-container').querySelector('span').innerText = isReviewMode ? "오답 복습 🔁" : "1음절 음가 학습 �";
+            document.getElementById('feedback').innerText = "";
+            document.getElementById('next-btn').style.visibility = 'hidden';
+            document.getElementById('options').style.display = 'grid';
+            document.getElementById('word-display').style.display = 'flex';
+            document.getElementById('feedback-area').style.display = 'flex';
+            document.getElementById('progress-indicator').style.display = 'block';
+
+            // cleanup result screen if any (simplistic approach: remove check if existing, but here we just hide/show content)
+            // Ideally we'd have separate divs like the example but I will adapt existing layout
+            const resultDiv = document.getElementById('result-screen');
+            if (resultDiv) resultDiv.remove();
+
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            if (currentIdx >= currentQuizSet.length) { showResult(); return; }
+
+            // Update Progress
+            document.getElementById('progress-indicator').innerText = `${currentIdx + 1} / ${currentQuizSet.length}`;
+
+            const q = currentQuizSet[currentIdx];
+            document.getElementById('word-display').innerText = q.glyph;
+            document.getElementById('feedback').innerText = "";
+            document.getElementById('next-btn').style.visibility = 'hidden';
+
+            // Use transliteration as the answer key
+            let options = [q.transliteration];
+            let others = hieroData.filter(i => i.transliteration !== q.transliteration).map(i => i.transliteration);
+            let shuffleOthers = [...new Set(others)].sort(() => Math.random() - 0.5);
+            for (let i = 0; i < 3; i++) options.push(shuffleOthers[i]);
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = "";
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, q);
+                optionsDiv.appendChild(btn);
+            });
+
+            // Update score display if it exists, or create it
+            // For now, I'll just append simple text to header or separate element if requested.
+            // The user wants functionality "like the example" which means I should probably add the score display UI too.
+        }
+
+        function checkAnswer(selected, qObj) {
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+            speakPhonetic(qObj.sound_desc);
+
+            const fb = document.getElementById('feedback');
+            if (selected === qObj.transliteration) {
+                fb.innerHTML = `<span class="correct">정답! [ ${qObj.transliteration} ]</span><br><small>${qObj.object} (${qObj.phonetic})</small>`;
+                correctCount++;
+            } else {
+                fb.innerHTML = `<span class="incorrect">오답! 정답은 [ ${qObj.transliteration} ]</span><br><small>${qObj.object}</small>`;
+                if (!failedQuestions.some(item => item.transliteration === qObj.transliteration)) failedQuestions.push(qObj);
+            }
+            document.getElementById('next-btn').style.visibility = 'visible';
+            document.getElementById('next-btn').onclick = goToNextQuestion;
+        }
+
+        function goToNextQuestion() {
+            currentIdx++;
+            renderQuestion();
+        }
+
+        function showResult() {
+            const container = document.getElementById('game-container');
+
+            // Create result screen overlay or replace content
+            // I will clear content and show result
+            document.getElementById('word-display').style.display = 'none';
+            document.getElementById('feedback-area').style.display = 'none';
+            document.getElementById('options').style.display = 'none';
+            document.getElementById('progress-indicator').style.display = 'none';
+
+            let resultDiv = document.createElement('div');
+            resultDiv.id = 'result-screen';
+            resultDiv.style.textAlign = 'center';
+            resultDiv.style.padding = '20px';
+
+            resultDiv.innerHTML = `
+                <span style="font-size: 50px;">🎉</span>
+                <h2>학습 완료!</h2>
+                <p style="font-size: 20px; color: #5d4037;">${currentQuizSet.length}문제 중 ${correctCount}점</p>
+                <button onclick="startGame()" style="background:var(--primary); color:white; padding:15px 30px; border:none; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:10px; font-size:16px;">✨ 새로운 10문제</button>
+            `;
+
+            if (failedQuestions.length > 0) {
+                let retryBtn = document.createElement('button');
+                retryBtn.innerText = "🔁 오답 복습하기 (" + failedQuestions.length + "문제)";
+                retryBtn.style.cssText = "background:#d7c4a3; color:#3e2723; padding:15px 30px; border:none; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:10px; display:block; margin: 10px auto; font-size:16px;";
+                retryBtn.onclick = startRetryMode;
+                resultDiv.appendChild(retryBtn);
+            }
+
+            container.appendChild(resultDiv);
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+
+</html>
