@@ -1,0 +1,140 @@
+{
+    "glyph": "𓈆",
+    "transliteration": "ḫꜥ",
+    "object": "일출 (언덕 위로 뜨는 해)",
+    "phonetic": "kha",
+    "sound_desc": "카"
+},
+{
+    "glyph": "𓎑",
+    "transliteration": "sꜣ",
+    "object": "말린 매트 (보호)",
+    "phonetic": "sa",
+    "sound_desc": "사"
+},
+{
+    "glyph": "𓆄",
+    "transliteration": "šw",
+    "object": "깃털",
+    "phonetic": "shu",
+    "sound_desc": "슈"
+},
+{
+    "glyph": "𓆎",
+    "transliteration": "km",
+    "object": "악어 비늘 (검음)",
+    "phonetic": "kem",
+    "sound_desc": "켐"
+},
+{
+    "glyph": "𓅝",
+    "transliteration": "gm",
+    "object": "따오기",
+    "phonetic": "gem",
+    "sound_desc": "겜"
+},
+{
+    "glyph": "𓃹",
+    "transliteration": "wn",
+    "object": "토끼",
+    "phonetic": "wen",
+    "sound_desc": "웬"
+},
+{
+    "glyph": "𓅨",
+    "transliteration": "wr",
+    "object": "제비",
+    "phonetic": "wer",
+    "sound_desc": "웨르"
+},
+{
+    "glyph": "𓅑",
+    "transliteration": "nḥ",
+    "object": "뿔닭",
+    "phonetic": "neh",
+    "sound_desc": "네흐"
+},
+{
+    "glyph": "𓂸",
+    "transliteration": "mt",
+    "object": "남근",
+    "phonetic": "met",
+    "sound_desc": "메트"
+},
+{
+    "glyph": "𓌃",
+    "transliteration": "md",
+    "object": "지팡이",
+    "phonetic": "med",
+    "sound_desc": "메드"
+},
+{
+    "glyph": "𓎘",
+    "transliteration": "wḏ",
+    "object": "끈",
+    "phonetic": "wedj",
+    "sound_desc": "웨즈"
+},
+{
+    "glyph": "𓄣",
+    "transliteration": "ib",
+    "object": "심장",
+    "phonetic": "ib",
+    "sound_desc": "이브"
+},
+{
+    "glyph": "𓏶",
+    "transliteration": "im",
+    "object": "교차된 막대",
+    "phonetic": "im",
+    "sound_desc": "임"
+},
+{
+    "glyph": "𓐛",
+    "transliteration": "gs",
+    "object": "옆면 (갈비뼈)",
+    "phonetic": "ges",
+    "sound_desc": "게스"
+}
+ {
+    "glyph": "𓃹",
+    "transliteration": "wn",
+    "object": "토끼",
+    "phonetic": "wen",
+    "sound_desc": "웬"
+},
+{
+    "glyph": "𓄻",
+    "transliteration": "pḥ",
+    "object": "동물의 뒷다리",
+    "phonetic": "peh",
+    "sound_desc": "페흐"
+},
+{
+    "glyph": "𓇚",
+    "transliteration": "ḥn",
+    "object": "식물",
+    "phonetic": "hen",
+    "sound_desc": "헨"
+},
+{
+    "glyph": "𓅨",
+    "transliteration": "wr",
+    "object": "제비",
+    "phonetic": "wer",
+    "sound_desc": "웨르"
+},
+{
+    "glyph": "�",
+    "transliteration": "tw",
+    "object": "말똥가리 (또는 새)",
+    "phonetic": "tw",
+    "sound_desc": "트우"
+},
+{
+    "glyph": "�𓃹",
+    "transliteration": "wn",
+    "object": "토끼",
+    "phonetic": "wen",
+    "sound_desc": "웬"
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>히에로글리프 학습</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #eaddca 0%, #d2b48c 100%);
+            --card-bg: #ffffff;
+            --primary: #8b4513;
+            --text-color: #3e2723;
+            --accent: #d7c4a3;
+        }
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        #main-container {
+            background: var(--card-bg);
+            padding: 40px 25px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border: 8px solid #fdfbf7;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        p.subtitle {
+            color: #5d4037;
+            margin: 0 0 20px 0;
+            font-size: 16px;
+        }
+
+        button.option-btn:active:not(:disabled) {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .menu-grid {
+            display: grid;
+            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            /* Changed to 2 columns for better uniformity */
+        }
+
+        a.menu-btn {
+            display: flex;
+            flex-direction: column;
+            /* Stack vertically for 2-column layout */
+            align-items: center;
+            justify-content: center;
+            padding: 20px 10px;
+            background: #fffdfa;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            box-shadow: 0 5px 0px #d7c4a3;
+            transition: all 0.1s;
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid transparent;
+            height: 120px;
+            /* Fixed height for uniformity */
+        }
+
+        a.menu-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        a.menu-btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .glyph-icon {
+            font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', sans-serif;
+            font-size: 40px;
+            /* Larger icon */
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .level-tag {
+            background: #efebe9;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #795548;
+            margin-bottom: 5px;
+            /* Moved to middle */
+            display: none;
+            /* Hidden for clearer 2-col look, or we can keep it? Let's hide it for cleaner buttons or make it small */
+        }
+
+        /* Let's keep the tag but style it better for vertical button */
+        .level-tag {
+            display: inline-block;
+            margin: 0 0 5px 0;
+            font-size: 11px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="main-container">
+        <div>
+            <h1>히에로글리프 학습</h1>
+            <p class="subtitle">고대 이집트 상형문자 퀴즈</p>
+        </div>
+
+        <div class="menu-grid">
+            <a href="one.html" class="menu-btn">
+                <span class="level-tag">기초</span>
+                <span class="glyph-icon">𓄿</span>
+                <span>1음절</span>
+            </a>
+            <a href="two.html" class="menu-btn">
+                <span class="level-tag">중급</span>
+                <span class="glyph-icon">𓎟</span>
+                <span>2음절</span>
+            </a>
+            <a href="three.html" class="menu-btn">
+                <span class="level-tag">고급</span>
+                <span class="glyph-icon">𓋹</span>
+                <span>3음절</span>
+            </a>
+            <a href="four.html" class="menu-btn">
+                <span class="level-tag">심화</span>
+                <span class="glyph-icon">𓄪</span>
+                <span>4음절</span>
+            </a>
+            <a href="five.html" class="menu-btn">
+                <span class="level-tag">마스터</span>
+                <span class="glyph-icon">𓉡</span>
+                <span>5+음절</span>
+            </a>
+            <a href="mix.html" class="menu-btn">
+                <span class="level-tag">종합</span>
+                <span class="glyph-icon">𓏞</span>
+                <span>전체 학습</span>
+            </a>
+        </div>
+
+        <footer>
+            Created with Antigravity
+        </footer>
+    </div>
+
+</body>
+
+</html>
