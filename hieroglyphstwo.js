@@ -30,7 +30,7 @@ const hieroData = [
     { "glyph": "𓊽", "transliteration": "ḏd", "object": "제드 기둥 (안정)", "phonetic": "djed", "sound_desc": "제드" },
     { "glyph": "𓅡", "transliteration": "bꜣ", "object": "황새 (영혼)", "phonetic": "ba", "sound_desc": "바" },
     { "glyph": "𓊨", "transliteration": "ꜣs", "object": "좌석 (왕좌)", "phonetic": "is", "sound_desc": "이스" },
-    { "glyph": "𓏌", "transliteration": "mw", "object": "우유 항아리", "phonetic": "mw", "sound_desc": "무" },
+    { "glyph": "𓏌", "transliteration": "in 또는 nw", "object": "우유 항아리", "phonetic": "in / nw", "sound_desc": "인 또는 누" },
     { "glyph": "𓇳", "transliteration": "rꜥ", "object": "태양", "phonetic": "ra", "sound_desc": "라" },
     { "glyph": "𓍘", "transliteration": "tỉ", "object": "공이", "phonetic": "ti", "sound_desc": "티" },
     { "glyph": "𓍃", "transliteration": "tm", "object": "썰매", "phonetic": "tem", "sound_desc": "템" },
